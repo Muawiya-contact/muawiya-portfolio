@@ -1,0 +1,27 @@
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem clamp(1.25rem, 5vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.line {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--white-muted);
+  font-style: italic;
+}
+
+.email {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--blue-muted);
+  transition: color 0.2s;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.email:hover {
+  color: var(--blue-glow);
+}
