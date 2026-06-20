@@ -1,11 +1,12 @@
 {
-    "name": "Muawiya Amir",
-    "short_name": "Muawiya",
-    "icons": [
-      { "src": "/muawiya-portfolio/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
-      { "src": "/muawiya-portfolio/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
-    ],
-    "theme_color": "#0a1628",
-    "background_color": "#0a1628",
-    "display": "standalone"
-  }
+  "name": "Muawiya Amir",
+  "short_name": "Muawiya",
+  "icons": [
+    { "src": "android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#070f1c",
+  "background_color": "#070f1c",
+  "display": "standalone",
+  "start_url": "./"
+}

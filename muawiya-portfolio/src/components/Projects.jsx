@@ -10,7 +10,7 @@ export default function Projects() {
     <section id="projects" className={styles.section} ref={ref}>
       <div className={`${styles.headerWrap} ${inView ? styles.visible : ''}`}>
         <SectionHeader
-          number="04"
+          number="03"
           title="things I built"
           subtitle="scroll sideways — yes, on purpose"
         />

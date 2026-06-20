@@ -45,43 +45,7 @@ export const data = {
     "I'm a software engineer who likes the whole stack — from x86_64 kernel code up to machine-learning pipelines. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real open-source codebases where the work has to hold up to review.",
     "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph, the Linux Foundation's crowd.dev, and RocketChat's homeserver.",
     "On the product side I work part-time at SudoStudy, an education platform, building backend services and shipping features to real students. I also run Coding Moves, a YouTube channel where I teach programming and AI.",
-    "On a personal note, I'm a Hafiz-e-Quran — the same daily discipline behind memorizing the Qur'an is what keeps me consistent and careful in my work.",
     "I care about clean engineering, code other people can build on, and shipping things that actually work — whether it's a kernel, an ML pipeline, or a connector in someone else's codebase.",
-  ],
-
-  experience: [
-    {
-      role: 'Open-Source Engineer & Triage Collaborator',
-      org: 'drt-hub/drt',
-      period: 'Apr 2026 — Present',
-      points: [
-        'Promoted to Triage Collaborator; review pull requests, triage issues, and shape feature design alongside maintainers.',
-        'Designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped OpenTelemetry tracing and metrics.',
-      ],
-      link: 'https://github.com/drt-hub/drt/pulls?q=is%3Apr+author%3AMuawiya-contact',
-      linkLabel: 'view my pull requests',
-    },
-    {
-      role: 'Full-Stack Developer (Part-Time)',
-      org: 'SudoStudy',
-      period: 'Sep 2025 — Present',
-      points: [
-        'Build backend services and databases for a live education platform and integrate third-party APIs.',
-        'Shipped student-facing features including native mobile-camera capture and quiz-attempt review for teachers.',
-      ],
-      link: 'https://github.com/SudoStudy/SudoStudy',
-      linkLabel: 'SudoStudy on GitHub',
-    },
-    {
-      role: 'Python Developer Intern',
-      org: 'CodeAlpha',
-      period: 'Feb 2025 — Apr 2026',
-      points: [
-        'Automated data-processing pipelines and built scalable Flask backends; improved script efficiency and reliability.',
-      ],
-      link: '',
-      linkLabel: '',
-    },
   ],
 
   education: [
@@ -234,7 +198,6 @@ export const data = {
 
   nav: [
     { id: 'about', label: 'about' },
-    { id: 'experience', label: 'experience' },
     { id: 'skills', label: 'skills' },
     { id: 'projects', label: 'projects' },
     { id: 'open-source', label: 'open source' },

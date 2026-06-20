@@ -11,7 +11,7 @@ export default function Skills() {
       <div className={`${styles.layout} ${inView ? styles.visible : ''}`}>
         <aside className={styles.sidebar}>
           <SectionHeader
-            number="03"
+            number="02"
             title="stack"
             subtitle="things I actually use, not things I've watched a tutorial about"
           />

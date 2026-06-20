@@ -10,7 +10,7 @@ export default function OpenSource() {
     <section id="open-source" className={styles.section} ref={ref}>
       <div className={`${styles.wrap} ${inView ? styles.show : ''}`}>
         <SectionHeader
-          number="05"
+          number="04"
           title="open source"
           subtitle="code I shipped to repos I don't own"
           align="right"

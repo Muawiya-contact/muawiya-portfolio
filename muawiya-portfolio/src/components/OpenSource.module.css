@@ -1,0 +1,142 @@
+.section {
+  padding: 6rem 0;
+  background: rgba(12, 26, 51, 0.25);
+}
+
+.wrap {
+  max-width: 900px;
+  margin: 0 0 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 4rem) 0 2rem;
+  opacity: 1;
+}
+
+.show .entry {
+  opacity: 1;
+  transform: none;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  gap: 1rem 1.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(26, 95, 212, 0.1);
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.2s;
+  cursor: alias;
+}
+
+.entry:first-child {
+  border-top: 1px solid rgba(26, 95, 212, 0.1);
+}
+
+.entry:hover {
+  border-color: rgba(26, 95, 212, 0.25);
+}
+
+.entry:hover .linkArrow {
+  color: var(--blue-glow);
+  transform: translate(2px, -2px);
+}
+
+.index {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--blue-ghost);
+  line-height: 1;
+  padding-top: 0.2rem;
+}
+
+.body {
+  min-width: 0;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  align-items: baseline;
+  margin-bottom: 0.35rem;
+}
+
+.org {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.highlight {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--amber);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.desc {
+  font-size: 0.9rem;
+  color: var(--white-dim);
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+}
+
+.prs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.prs li {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--white-muted);
+  padding-left: 0.9rem;
+  position: relative;
+}
+
+.prs li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--blue-accent);
+}
+
+.linkArrow {
+  font-size: 1rem;
+  color: var(--blue-muted);
+  align-self: start;
+  padding-top: 0.3rem;
+  transition: color 0.2s, transform 0.2s;
+}
+
+@media (max-width: 600px) {
+  .entry {
+    grid-template-columns: 2rem 1fr;
+  }
+
+  .linkArrow {
+    display: none;
+  }
+
+  .wrap {
+    padding-right: 1.25rem;
+  }
+}
