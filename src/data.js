@@ -84,6 +84,37 @@ export const data = {
     },
   ],
 
+  books: [
+    {
+      title: 'Designing Data-Intensive Applications',
+      author: 'Martin Kleppmann',
+      tag: 'Data Systems',
+      status: 'in progress',
+      takeaway: 'Changing how I reason about storage, replication, and failure modes.',
+    },
+    {
+      title: 'Operating System Concepts',
+      author: 'Silberschatz, Galvin & Gagne',
+      tag: 'Systems',
+      status: '',
+      takeaway: 'The foundation under Arion OS — scheduling, memory, and concurrency.',
+    },
+    {
+      title: 'Practical MLOps',
+      author: 'Noah Gift & Alfredo Deza',
+      tag: 'MLOps',
+      status: '',
+      takeaway: 'Taking ML past the notebook: pipelines, deployment, and monitoring.',
+    },
+    {
+      title: 'Ultralearning',
+      author: 'Scott H. Young',
+      tag: 'Learning',
+      status: '',
+      takeaway: 'A deliberate framework for picking up hard skills fast.',
+    },
+  ],
+
   education: [
     {
       degree: 'BS Artificial Intelligence',
@@ -237,6 +268,7 @@ export const data = {
     { id: 'experience', label: 'experience' },
     { id: 'skills', label: 'skills' },
     { id: 'projects', label: 'projects' },
+    { id: 'books', label: 'bookshelf' },
     { id: 'open-source', label: 'open source' },
     { id: 'contact', label: 'contact' },
   ],

@@ -6,6 +6,7 @@ import Skills from './components/Skills'
 import Projects from './components/Projects'
 import OpenSource from './components/OpenSource'
 import Contact from './components/Contact'
+import Books from './components/Books'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <Skills />
         <Projects />
         <OpenSource />
+        <Books />
         <Contact />
       </main>
       <Footer />

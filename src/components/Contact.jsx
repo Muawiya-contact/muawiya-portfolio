@@ -10,7 +10,7 @@ export default function Contact() {
     <section id="contact" className={styles.section} ref={ref}>
       <div className={`${styles.wrap} ${inView ? styles.visible : ''}`}>
         <SectionHeader
-          number="06"
+          number="07"
           title="say hi"
           subtitle={data.contact.intro}
         />
