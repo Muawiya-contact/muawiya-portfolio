@@ -63,8 +63,12 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--amber);
+  background: currentColor;
 }
+
+.inProgress { color: var(--amber); }
+.completed { color: var(--green); }
+.pending { color: var(--white-muted); }
 
 .title {
   font-family: var(--font-display);

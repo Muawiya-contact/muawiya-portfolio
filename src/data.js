@@ -86,21 +86,21 @@ export const data = {
       title: 'Operating System Concepts',
       author: 'Silberschatz, Galvin & Gagne',
       tag: 'Systems',
-      status: '',
+      status: 'completed',
       takeaway: 'Deepening my understanding of scheduling, memory, and concurrency.',
     },
     {
       title: 'Practical MLOps',
       author: 'Noah Gift & Alfredo Deza',
       tag: 'MLOps',
-      status: '',
+      status: 'pending',
       takeaway: 'Taking ML past the notebook: pipelines, deployment, and monitoring.',
     },
     {
       title: 'Ultralearning',
       author: 'Scott H. Young',
       tag: 'Learning',
-      status: '',
+      status: 'completed',
       takeaway: 'A deliberate framework for picking up hard skills fast.',
     },
   ],
@@ -222,4 +222,42 @@ export const data = {
     { id: 'open-source', label: 'open source' },
     { id: 'contact', label: 'contact' },
   ],
+
+  // Consumed only by scripts/generate-resume.mjs. The print resume carries a
+  // few things the site doesn't (phone, certifications, interests) and states
+  // the experience in more detail than the site's two-line summaries.
+  // Distinct from `resume` above, which is the download filename.
+  resumeContent: {
+    title: 'Software Engineer · Backend, ML & Open Source',
+    phone: '+92 329 7316882',
+    summary:
+      'Artificial Intelligence and Mathematics student and active open-source contributor. Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine shipped across 30+ PyPI releases, where I build connectors, configuration validation, and observability tooling and review community pull requests. I work across backend systems, machine-learning infrastructure, and production open-source tooling, and I am drawn to problems that need both engineering depth and clean execution.',
+    // Keyed by the `org` field of data.experience; entries without a match fall
+    // back to that role's site-facing `points`.
+    points: {
+      'drt-hub/drt': [
+        'Promoted to Triage Collaborator after sustained, high-quality contributions; review pull requests, triage issues, and shape feature design with maintainers.',
+        'Designed and built the dynamic connector registry that auto-discovers sources and destinations, removing hardcoded dispatch maps across the engine.',
+        'Added the Jira connector (create/update), JSON Schema validation for config files, and data-quality tests (freshness, unique, accepted_values).',
+        'Shipped OpenTelemetry tracing and metrics with lazy, idempotent providers (+680 lines) and dry-run row-count diffs for safe sync previews.',
+        'Selected to contribute with this organization for Google Summer of Code 2027.',
+      ],
+      SudoStudy: [
+        'Build backend services and databases for an education platform and integrate third-party APIs.',
+        'Shipped student features including native mobile-camera capture for long-answer questions and quiz-attempt review for teachers.',
+        'Debugged cross-stack failures across quiz, subject, and group-management flows.',
+      ],
+    },
+    certifications: [
+      'Applied Machine Learning — Verified',
+      'Python AI Developer — Mimo',
+      'Google Cloud Specialization — NAVTTC (ongoing)',
+    ],
+    competitive: '400+ problems solved on LeetCode, focused on DSA & algorithm optimization.',
+    interests: [
+      'ML research paper (in progress)',
+      'Open-source security & infrastructure',
+      'Math × AI intersection',
+    ],
+  },
 }
