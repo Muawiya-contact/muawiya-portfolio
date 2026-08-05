@@ -8,6 +8,12 @@
 //
 // Rendering goes through headless Chrome (or Edge) --print-to-pdf, which is
 // already present on every machine this repo gets built on. No new dependency.
+//
+// LAYOUT: deliberately single-column and plain. Applicant tracking systems
+// (Greenhouse, Lever, Workday) parse top-to-bottom and routinely garble
+// multi-column resumes by interleaving the sidebar into the body text. Keep it
+// this way: no sidebars, no floats, no text in shapes, no images, standard
+// section headings, and skills as comma-separated text rather than badges.
 
 import { execFileSync } from 'node:child_process'
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
@@ -36,65 +42,102 @@ const esc = (s) =>
 
 const bare = (url) => String(url).replace(/^https?:\/\//, '').replace(/\/$/, '')
 
-const list = (items, cls = '') =>
-  `<ul class="${cls}">${items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>`
-
 // The site links to a repo; the resume prints the org/repo path instead, since
 // a printed URL is only useful if it is readable.
-const repoPath = (link) => bare(link).replace(/^github\.com\//, '')
+const repoPath = (url) => bare(url).replace(/^github\.com\//, '')
+
+const link = (href, text) => `<a href="${esc(href)}">${esc(text)}</a>`
+
+// Where a printed label and its real URL diverge. data.js points the drt-hub
+// entry at a PR search, and crowd.dev's canonical repo moved to the crowd-dev
+// org while the project is still known by the Linux Foundation path we print.
+const REPO_URLS = {
+  'drt-hub/drt': 'https://github.com/drt-hub/drt',
+  'linuxfoundation/crowd.dev': 'https://github.com/crowd-dev/crowd.dev',
+}
+
+// The visible label stays the full literal org/repo path, so an ATS reading
+// text-only still gets a parseable string.
+const repoLink = (path) => link(REPO_URLS[path] ?? `https://github.com/${path}`, path)
+
+// Inline so the PDF stays self-contained; no external image request.
+const GITHUB_ICON =
+  '<svg class="ghIcon" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" ' +
+  'd="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49' +
+  '-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82' +
+  '.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15' +
+  '-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82' +
+  '.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07' +
+  '-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>'
 
 function buildHtml() {
   const { resumeContent: r } = data
 
+  // Title and dates share a row, dates flush right. A two-cell flex row keeps
+  // the extracted text order as "<role, org> <dates>", which parsers handle.
   const experience = data.experience
     .map((job) => {
       const points = r.points[job.org] ?? job.points
+      const orgHref = REPO_URLS[job.org] ?? job.link
+      const org = orgHref ? link(orgHref, job.org) : esc(job.org)
       return `
-      <article class="job">
-        <div class="jobHead">
-          <h3>${esc(job.role)} · <span class="org">${esc(job.org)}</span></h3>
-          <span class="period">${esc(job.period)}</span>
-        </div>
-        ${list(points)}
-      </article>`
+    <div class="entry">
+      <div class="row">
+        <span class="rowMain"><strong>${esc(job.role)}</strong>, ${org}</span>
+        <span class="rowDate">${esc(job.period)}</span>
+      </div>
+      <ul>${points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
+    </div>`
     })
     .join('')
 
+  // CGPA is intentionally not printed.
   const education = data.education
     .map(
       (e) => `
-      <div class="edu">
-        <strong>${esc(e.degree)}</strong>
-        <span>${esc(e.institute)}</span>
-      </div>`,
+    <div class="entry">
+      <div class="row">
+        <span class="rowMain"><strong>${esc(e.degree)}</strong></span>
+      </div>
+      <div class="sub">${esc(e.institute)}</div>
+    </div>`,
     )
     .join('')
 
   const projects = data.projects
     .map(
       (p) => `
-      <div class="proj">
-        <strong>${esc(p.name)}</strong>
-        <p>${esc(p.desc)}</p>
-      </div>`,
+    <div class="entry">
+      <div class="sub"><strong>${esc(p.name)}</strong> — ${esc(p.desc)}</div>
+    </div>`,
     )
     .join('')
 
   const openSource = data.openSource
-    .map((o) => `<li><strong>${esc(repoPath(o.link))}</strong> — ${esc(o.desc)}</li>`)
+    .map((o) => `<li><strong>${repoLink(repoPath(o.link))}</strong> — ${esc(o.desc)}</li>`)
     .join('')
 
+  // "Languages: Python, C / C++, ..." — plain text, no badges.
   const skills = data.skills
     .map(
-      (s) => `
-      <div class="skillGroup">
-        <span class="skillLabel">${esc(s.category)}</span>
-        <div class="chips">${s.items.map((i) => `<span>${esc(i)}</span>`).join('')}</div>
-      </div>`,
+      (s) =>
+        `<div class="skillLine"><strong>${esc(s.category)}:</strong> ${esc(
+          s.items.join(', '),
+        )}</div>`,
     )
     .join('')
 
-  const [first, ...rest] = data.name.split(' ')
+  const contact = [
+    esc(data.location),
+    esc(r.phone),
+    link(`mailto:${data.email}`, data.email),
+    GITHUB_ICON + link(data.links.github, bare(data.links.github)),
+    link(data.links.linkedin, bare(data.links.linkedin)),
+  ].join(' &nbsp;|&nbsp; ')
+
+  const certs = [...r.certifications, r.competitive]
+    .map((c) => `<li>${esc(c)}</li>`)
+    .join('')
 
   return `<!doctype html>
 <html lang="en">
@@ -102,146 +145,90 @@ function buildHtml() {
 <meta charset="utf-8">
 <title>${esc(data.name)} — Résumé</title>
 <style>
-  @page { size: A4; margin: 0; }
+  @page { size: A4; margin: 10mm 12mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy: #0f2038;
-    --ink: #1b2a3d;
-    --body: #3d4a5c;
-    --accent: #2f6fd0;
-    --rule: #d8e0ea;
-    --sidebar-w: 68mm;
-  }
-
   body {
-    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 8.6pt;
-    line-height: 1.45;
-    color: var(--body);
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    font-family: Calibri, "Segoe UI", Arial, sans-serif;
+    font-size: 9.6pt;
+    line-height: 1.24;
+    color: #000;
   }
 
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0;
-    width: var(--sidebar-w);
-    height: 297mm;
-    background: var(--navy);
-    color: #c7d4e4;
-    padding: 11mm 7mm;
-    overflow: hidden;
+  header { text-align: center; margin-bottom: 2.4mm; }
+  h1 {
+    font-size: 17pt;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.6mm;
   }
-  .main { margin-left: var(--sidebar-w); padding: 13mm 11mm 13mm 9mm; }
+  .role { font-size: 10pt; margin-bottom: 1.1mm; }
+  .contact { font-size: 8.8pt; }
 
-  .name { font-size: 21pt; line-height: 1.05; font-weight: 700; color: #fff; }
-  .role { margin-top: 3mm; font-size: 8pt; color: #91a6c0; }
+  /* Clickable but visually plain: an ATS reads the label text either way, and
+     blue underlines would fight the rest of the page. */
+  a { color: inherit; text-decoration: none; }
 
-  .sideHead {
-    margin: 4.6mm 0 2mm;
-    font-size: 7.2pt; font-weight: 700;
-    letter-spacing: 0.13em; text-transform: uppercase;
-    color: #6f8db5;
-    border-top: 1px solid rgba(255,255,255,0.13);
-    padding-top: 2.4mm;
-  }
-  .contact div { margin-bottom: 1.1mm; word-break: break-word; }
-
-  .skillGroup { margin-bottom: 2mm; }
-  .skillLabel { font-size: 6.9pt; color: #8fa6c2; }
-  .chips { margin-top: 1mm; display: flex; flex-wrap: wrap; gap: 1mm; }
-  .chips span {
-    font-size: 6.6pt;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 2px;
-    padding: 0.4mm 1.2mm;
-    color: #d5e1f0;
-  }
-
-  .sidebar ul { list-style: none; }
-  .sidebar li { margin-bottom: 1.1mm; padding-left: 2.6mm; position: relative; font-size: 7.4pt; }
-  .sidebar li::before {
-    content: ''; position: absolute; left: 0; top: 1.5mm;
-    width: 1.1mm; height: 1.1mm; border-radius: 50%; background: var(--accent);
+  .ghIcon {
+    width: 1em; height: 1em;
+    vertical-align: -0.14em;
+    margin-right: 0.25em;
   }
 
   h2 {
-    font-size: 8.4pt; font-weight: 700;
-    letter-spacing: 0.11em; text-transform: uppercase;
-    color: var(--accent);
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 1.4mm;
-    margin: 5.5mm 0 2.6mm;
-  }
-  h2:first-of-type { margin-top: 0; }
-
-  .job { margin-bottom: 3.2mm; }
-  .jobHead { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
-  .jobHead h3 { font-size: 9.2pt; color: var(--ink); font-weight: 700; }
-  .org { color: var(--accent); }
-  .period { font-size: 7.4pt; color: #7c8a9c; font-style: italic; white-space: nowrap; }
-
-  .main ul { margin-top: 1.2mm; list-style: none; }
-  .main li { position: relative; padding-left: 3.2mm; margin-bottom: 0.9mm; }
-  .main li::before {
-    content: ''; position: absolute; left: 0.6mm; top: 1.6mm;
-    width: 1mm; height: 1mm; border-radius: 50%; background: var(--accent);
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.6mm;
+    margin: 2.8mm 0 1.4mm;
+    /* Never strand a heading at the foot of a page. */
+    page-break-after: avoid;
   }
 
-  .edu { margin-bottom: 2mm; }
-  .edu strong { display: block; font-size: 8.8pt; color: var(--ink); }
-  .edu span { font-size: 7.8pt; }
+  /* Keep a role with its first bullets, and a degree with its institute. */
+  .entry { margin-bottom: 1.7mm; page-break-inside: avoid; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 6mm; }
+  .rowMain { font-size: 10pt; }
+  .rowDate { font-size: 9.2pt; white-space: nowrap; }
+  .sub { font-size: 9.4pt; }
 
-  .proj { margin-bottom: 1.9mm; }
-  .proj strong { color: var(--accent); font-size: 8.6pt; }
-  .proj p { font-size: 7.9pt; }
+  ul { margin: 0.6mm 0 0 4.6mm; }
+  li { margin-bottom: 0.5mm; padding-left: 0.5mm; }
+
+  .skillLine { margin-bottom: 0.8mm; font-size: 9.5pt; }
+
+  p { text-align: justify; }
 </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="name">${esc(first)}<br>${esc(rest.join(' '))}</div>
+  <header>
+    <h1>${esc(data.name)}</h1>
     <div class="role">${esc(r.title)}</div>
+    <div class="contact">${contact}</div>
+  </header>
 
-    <div class="sideHead">Contact</div>
-    <div class="contact">
-      <div>${esc(data.location)}</div>
-      <div>${esc(r.phone)}</div>
-      <div>${esc(data.email)}</div>
-      <div>${esc(bare(data.links.linkedin))}</div>
-      <div>${esc(bare(data.links.github))}</div>
-      <div>${esc(bare(data.links.leetcode))}</div>
-    </div>
+  <h2>Professional Summary</h2>
+  <p>${esc(r.summary)}</p>
 
-    <div class="sideHead">Technical Skills</div>
-    ${skills}
+  <h2>Technical Skills</h2>
+  ${skills}
 
-    <div class="sideHead">Certifications</div>
-    ${list(r.certifications)}
+  <h2>Professional Experience</h2>
+  ${experience}
 
-    <div class="sideHead">Competitive Programming</div>
-    <div style="font-size:7.6pt">${esc(r.competitive)}</div>
+  <h2>Projects</h2>
+  ${projects}
 
-    <div class="sideHead">Interests</div>
-    ${list(r.interests)}
-  </aside>
+  <h2>Open-Source Contributions</h2>
+  <ul>${openSource}</ul>
 
-  <main class="main">
-    <h2>Professional Summary</h2>
-    <p>${esc(r.summary)}</p>
+  <h2>Education</h2>
+  ${education}
 
-    <h2>Professional Experience</h2>
-    ${experience}
-
-    <h2>Education</h2>
-    ${education}
-
-    <h2>Projects</h2>
-    ${projects}
-
-    <h2>Open-Source Contributions</h2>
-    <ul>${openSource}</ul>
-  </main>
+  <h2>Certifications &amp; Competitive Programming</h2>
+  <ul>${certs}</ul>
 </body>
 </html>`
 }
