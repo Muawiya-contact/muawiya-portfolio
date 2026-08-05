@@ -3,6 +3,12 @@ import { SectionHeader } from './UI'
 import { useInView } from '../hooks/useInView'
 import styles from './Books.module.css'
 
+const statusStyle = {
+  'in progress': styles.inProgress,
+  completed: styles.completed,
+  pending: styles.pending,
+}
+
 export default function Books() {
   const [ref, inView] = useInView()
 
@@ -24,7 +30,11 @@ export default function Books() {
             >
               <div className={styles.top}>
                 <span className={styles.tag}>{book.tag}</span>
-                {book.status && <span className={styles.status}>{book.status}</span>}
+                {book.status && (
+                  <span className={`${styles.status} ${statusStyle[book.status] ?? ''}`}>
+                    {book.status}
+                  </span>
+                )}
               </div>
               <h3 className={styles.title}>{book.title}</h3>
               <div className={styles.author}>{book.author}</div>

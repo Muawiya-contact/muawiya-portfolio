@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "resume:pdf": "node scripts/generate-resume.mjs",
+    "prebuild": "npm run resume:pdf",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

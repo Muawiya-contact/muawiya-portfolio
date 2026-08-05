@@ -1,7 +1,7 @@
 export const data = {
   name: 'Muawiya Amir',
   title: 'Software Engineer · Systems, ML & Open Source',
-  tagline: 'I work the whole stack — from x86_64 kernel code to ML pipelines and production open-source tooling.',
+  tagline: 'I work across backend systems, machine learning pipelines, and production open-source tooling.',
   location: 'Multan, Pakistan',
   university: 'NFC IET, Multan',
   email: 'contactmuawia@gmail.com',
@@ -18,10 +18,10 @@ export const data = {
     terminal: [
       { prompt: '$', cmd: 'whoami', output: 'muawiya-amir' },
       { prompt: '$', cmd: 'role --current', output: 'software engineer · systems + ML' },
-      { prompt: '$', cmd: 'oss --orgs', output: 'drt-hub · Apache · Linux Foundation · RocketChat' },
+      { prompt: '$', cmd: 'oss --orgs', output: 'drt-hub · Apache · Linux Foundation' },
       { prompt: '$', cmd: 'drt-hub --status', output: 'Triage Collaborator' },
       { prompt: '$', cmd: 'gh contrib --year 2025', output: '1,201 contributions' },
-      { prompt: '$', cmd: 'building', output: 'SudoStudy (edtech) · Arion OS (x86_64)' },
+      { prompt: '$', cmd: 'building', output: 'SudoStudy (edtech)' },
     ],
     contributionGrid: [
       0, 1, 2, 1, 3, 2, 0, 1, 3, 4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0,
@@ -42,11 +42,11 @@ export const data = {
   ],
 
   about: [
-    "I'm a software engineer who likes the whole stack — from x86_64 kernel code up to machine-learning pipelines. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real open-source codebases where the work has to hold up to review.",
-    "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph, the Linux Foundation's crowd.dev, and RocketChat's homeserver.",
+    "I work across backend systems, machine learning pipelines, and production open-source tooling. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real open-source codebases where the work has to hold up to review.",
+    "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph and the Linux Foundation's crowd.dev.",
     "On the product side I work part-time at SudoStudy, an education platform, building backend services and shipping features to real students. I also run Coding Moves, a YouTube channel where I teach programming and AI.",
     "On a personal note, I'm a Hafiz-e-Quran — the same daily discipline behind memorizing the Qur'an is what keeps me consistent and careful in my work.",
-    "I care about clean engineering, code other people can build on, and shipping things that actually work — whether it's a kernel, an ML pipeline, or a connector in someone else's codebase.",
+    "I care about clean engineering, code other people can build on, and shipping things that actually work — whether it's a backend service, an ML pipeline, or a connector in someone else's codebase.",
   ],
 
   experience: [
@@ -72,16 +72,6 @@ export const data = {
       link: 'https://github.com/SudoStudy/SudoStudy',
       linkLabel: 'SudoStudy on GitHub',
     },
-    {
-      role: 'Python Developer Intern',
-      org: 'CodeAlpha',
-      period: 'Feb 2025 — Apr 2026',
-      points: [
-        'Automated data-processing pipelines and built scalable Flask backends; improved script efficiency and reliability.',
-      ],
-      link: '',
-      linkLabel: '',
-    },
   ],
 
   books: [
@@ -96,21 +86,21 @@ export const data = {
       title: 'Operating System Concepts',
       author: 'Silberschatz, Galvin & Gagne',
       tag: 'Systems',
-      status: '',
-      takeaway: 'The foundation under Arion OS — scheduling, memory, and concurrency.',
+      status: 'completed',
+      takeaway: 'Deepening my understanding of scheduling, memory, and concurrency.',
     },
     {
       title: 'Practical MLOps',
       author: 'Noah Gift & Alfredo Deza',
       tag: 'MLOps',
-      status: '',
+      status: 'pending',
       takeaway: 'Taking ML past the notebook: pipelines, deployment, and monitoring.',
     },
     {
       title: 'Ultralearning',
       author: 'Scott H. Young',
       tag: 'Learning',
-      status: '',
+      status: 'completed',
       takeaway: 'A deliberate framework for picking up hard skills fast.',
     },
   ],
@@ -155,36 +145,12 @@ export const data = {
 
   projects: [
     {
-      type: 'systems',
-      name: 'Arion OS',
-      desc: 'A learning-focused x86_64 operating system built from scratch — bootloader, kernel, memory management, and system calls, all without a framework.',
-      tags: ['C', 'x86_64 Asm', 'OS'],
-      link: 'https://github.com/Coding-Moves/Arion_OS',
-      year: '2025',
-    },
-    {
-      type: 'ai',
-      name: 'MedGemma Sentinel',
-      desc: 'A health-assistant prototype built on Google\u2019s MedGemma, focused on grounded responses and safety guardrails around medical advice.',
-      tags: ['Python', 'MedGemma', 'Health AI'],
-      link: 'https://github.com/Muawiya-contact/MedGemma-Sentinel',
-      year: '2025',
-    },
-    {
       type: 'math',
       name: 'Linear Algebra Library',
       desc: 'A Python numerical library built only from primitive types — no math libraries — implementing core linear-algebra routines by hand.',
       tags: ['Python', 'Numerical'],
       link: 'https://github.com/Coding-Moves/Linear-Algebra',
       year: '2025',
-    },
-    {
-      type: 'ml',
-      name: 'ML Predictor',
-      desc: 'An end-to-end ML pipeline covering data cleaning, feature engineering, and model training — the production-shaped parts, not just a notebook.',
-      tags: ['Python', 'Scikit-learn'],
-      link: 'https://github.com/Muawiya-contact/ML_Predictor',
-      year: '2024',
     },
     {
       type: 'edtech',
@@ -195,12 +161,20 @@ export const data = {
       year: '2024',
     },
     {
-      type: 'cv',
-      name: 'Face Mask Detection',
-      desc: 'Real-time mask detection using OpenCV and a convolutional neural network, trained and tuned for live webcam inference.',
-      tags: ['OpenCV', 'Deep Learning'],
-      link: 'https://github.com/Muawiya-contact/FaceMaskDetection',
-      year: '2023',
+      type: 'academic',
+      name: 'BSAI University Projects (NFC-Projects)',
+      desc: 'Structured collection of semester-wise coursework and systems projects for my BS in Artificial Intelligence at NFC IET Multan. Includes data structures, algorithms, IoT simulators, search engine implementations, and AI academic tools.',
+      tags: ['Python', 'C++', 'Java', 'JavaScript', 'TypeScript', 'Data Structures', 'Algorithms'],
+      link: 'https://github.com/Coding-Moves/BSAI-Projects',
+      year: '2025',
+    },
+    {
+      type: 'systems',
+      name: 'Diskern',
+      desc: 'Intelligent, read-only disk cleaner and analyzer that scans local file systems to determine file safety before freeing space. Built with a deterministic rules engine in Rust (crates/diskern-core) and a Tauri v2 + React desktop interface.',
+      tags: ['Rust', 'Tauri', 'React', 'JavaScript', 'BLAKE3', 'GitHub Actions', 'Systems Programming'],
+      link: 'https://github.com/Coding-Moves/diskern',
+      year: '2025',
     },
   ],
 
@@ -237,14 +211,6 @@ export const data = {
       highlight: 'Docs & specs audit',
       link: 'https://github.com/linuxfoundation/crowd.dev',
     },
-    {
-      org: 'RocketChat',
-      name: 'homeserver',
-      desc: 'Refactored a confusing getter (origin to senderDomain) in EventWrapper for a clearer, less error-prone event API.',
-      prs: ['refactor: rename origin getter to senderDomain in EventWrapper'],
-      highlight: 'API clarity',
-      link: 'https://github.com/RocketChat/homeserver',
-    },
   ],
 
   contact: {
@@ -272,4 +238,43 @@ export const data = {
     { id: 'open-source', label: 'open source' },
     { id: 'contact', label: 'contact' },
   ],
+
+  // Consumed only by scripts/generate-resume.mjs. The print resume carries a
+  // few things the site doesn't (phone, certifications, interests) and states
+  // the experience in more detail than the site's two-line summaries.
+  // Distinct from `resume` above, which is the download filename.
+  resumeContent: {
+    title: 'Software Engineer · Backend, ML & Open Source',
+    phone: '+92 329 7316882',
+    summary:
+      'Artificial Intelligence and Mathematics student and active open-source contributor. Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine shipped across 30+ PyPI releases, where I build connectors, configuration validation, and observability tooling and review community pull requests. I work across backend systems, machine-learning infrastructure, and production open-source tooling, and I am drawn to problems that need both engineering depth and clean execution.',
+    // Keyed by the `org` field of data.experience; entries without a match fall
+    // back to that role's site-facing `points`.
+    points: {
+      'drt-hub/drt': [
+        'Promoted to Triage Collaborator after sustained, high-quality contributions; review pull requests, triage issues, and shape feature design with maintainers.',
+        'Designed and built the dynamic connector registry that auto-discovers sources and destinations, removing hardcoded dispatch maps across the engine.',
+        'Added the Jira connector (create/update), JSON Schema validation for config files, and data-quality tests (freshness, unique, accepted_values).',
+        'Shipped OpenTelemetry tracing and metrics with lazy, idempotent providers (+680 lines) and dry-run row-count diffs for safe sync previews.',
+      ],
+      SudoStudy: [
+        'Build backend services and databases for an education platform and integrate third-party APIs.',
+        'Shipped student features including native mobile-camera capture for long-answer questions and quiz-attempt review for teachers.',
+        'Debugged cross-stack failures across quiz, subject, and group-management flows.',
+      ],
+    },
+    certifications: [
+      'Applied Machine Learning — Verified',
+      'Python AI Developer — Mimo',
+      'Google Cloud Specialization — NAVTTC (ongoing)',
+    ],
+    competitive: '400+ problems solved on LeetCode, focused on DSA & algorithm optimization.',
+    // Retained but not printed: the ATS resume omits an interests section to
+    // stay on one page. Re-add a block in generate-resume.mjs to restore it.
+    interests: [
+      'ML research paper (in progress)',
+      'Open-source security & infrastructure',
+      'Math × AI intersection',
+    ],
+  },
 }
