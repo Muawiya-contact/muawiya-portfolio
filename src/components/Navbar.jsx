@@ -20,7 +20,9 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [menuOpen])
 
   return (
@@ -42,10 +44,7 @@ export default function Navbar() {
               {item.label}
             </a>
           ))}
-          <a
-            href={`mailto:${data.email}`}
-            onClick={() => setMenuOpen(false)}
-          >
+          <a href={`mailto:${data.email}`} onClick={() => setMenuOpen(false)}>
             email
           </a>
           <a

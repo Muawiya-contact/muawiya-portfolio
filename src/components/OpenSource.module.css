@@ -30,7 +30,10 @@
   color: inherit;
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.2s;
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease,
+    border-color 0.2s;
   cursor: alias;
 }
 
@@ -124,7 +127,9 @@
   color: var(--blue-muted);
   align-self: start;
   padding-top: 0.3rem;
-  transition: color 0.2s, transform 0.2s;
+  transition:
+    color 0.2s,
+    transform 0.2s;
 }
 
 @media (max-width: 600px) {

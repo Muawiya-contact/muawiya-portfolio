@@ -51,7 +51,9 @@
   border-radius: 6px;
   display: block;
   text-decoration: none;
-  transition: border-color 0.25s, transform 0.25s;
+  transition:
+    border-color 0.25s,
+    transform 0.25s;
   opacity: 0;
   transform: translateX(30px);
 }
@@ -59,7 +61,10 @@
 .scrollWrap.visible .card {
   opacity: 1;
   transform: translateX(0);
-  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    border-color 0.25s;
 }
 
 .card:hover {
@@ -127,7 +132,9 @@
   right: 1.2rem;
   font-size: 0.9rem;
   color: var(--blue-muted);
-  transition: color 0.2s, transform 0.2s;
+  transition:
+    color 0.2s,
+    transform 0.2s;
 }
 
 .card:hover .arrow {

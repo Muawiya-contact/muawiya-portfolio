@@ -9,19 +9,11 @@ export default function Experience() {
   return (
     <section id="experience" className={styles.section} ref={ref}>
       <div className={`${styles.wrap} ${inView ? styles.show : ''}`}>
-        <SectionHeader
-          number="02"
-          title="experience"
-          subtitle="where I've built and shipped"
-        />
+        <SectionHeader number="02" title="experience" subtitle="where I've built and shipped" />
 
         <div className={styles.list}>
           {data.experience.map((job, i) => (
-            <div
-              key={job.org}
-              className={styles.entry}
-              style={{ transitionDelay: `${i * 0.1}s` }}
-            >
+            <div key={job.org} className={styles.entry} style={{ transitionDelay: `${i * 0.1}s` }}>
               <div className={styles.period}>{job.period}</div>
               <div className={styles.body}>
                 <h3 className={styles.role}>{job.role}</h3>
@@ -32,12 +24,7 @@ export default function Experience() {
                   ))}
                 </ul>
                 {job.link && (
-                  <a
-                    className={styles.link}
-                    href={job.link}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a className={styles.link} href={job.link} target="_blank" rel="noreferrer">
                     {job.linkLabel} ↗
                   </a>
                 )}

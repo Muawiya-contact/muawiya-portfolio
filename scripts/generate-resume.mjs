@@ -50,7 +50,10 @@ const esc = (s) =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
 
-const bare = (url) => String(url).replace(/^https?:\/\//, '').replace(/\/$/, '')
+const bare = (url) =>
+  String(url)
+    .replace(/^https?:\/\//, '')
+    .replace(/\/$/, '')
 
 // The site links to a repo; the resume prints the org/repo path instead, since
 // a printed URL is only useful if it is readable.

@@ -1,0 +1,9 @@
+node_modules
+dist
+package-lock.json
+
+# Transient Claude Code session worktrees
+.claude
+
+# Generated artefact, not source
+public/Muawiya-Amir-Resume.pdf
