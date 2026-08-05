@@ -1,7 +1,7 @@
 export const data = {
   name: 'Muawiya Amir',
   title: 'Software Engineer · Systems, ML & Open Source',
-  tagline: 'I work the whole stack — from x86_64 kernel code to ML pipelines and production open-source tooling.',
+  tagline: 'I work across backend systems, machine learning pipelines, and production open-source tooling.',
   location: 'Multan, Pakistan',
   university: 'NFC IET, Multan',
   email: 'contactmuawia@gmail.com',
@@ -18,10 +18,10 @@ export const data = {
     terminal: [
       { prompt: '$', cmd: 'whoami', output: 'muawiya-amir' },
       { prompt: '$', cmd: 'role --current', output: 'software engineer · systems + ML' },
-      { prompt: '$', cmd: 'oss --orgs', output: 'drt-hub · Apache · Linux Foundation · RocketChat' },
+      { prompt: '$', cmd: 'oss --orgs', output: 'drt-hub · Apache · Linux Foundation' },
       { prompt: '$', cmd: 'drt-hub --status', output: 'Triage Collaborator' },
       { prompt: '$', cmd: 'gh contrib --year 2025', output: '1,201 contributions' },
-      { prompt: '$', cmd: 'building', output: 'SudoStudy (edtech) · Arion OS (x86_64)' },
+      { prompt: '$', cmd: 'building', output: 'SudoStudy (edtech)' },
     ],
     contributionGrid: [
       0, 1, 2, 1, 3, 2, 0, 1, 3, 4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0,
@@ -42,10 +42,10 @@ export const data = {
   ],
 
   about: [
-    "I'm a software engineer who likes the whole stack — from x86_64 kernel code up to machine-learning pipelines. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real open-source codebases where the work has to hold up to review.",
-    "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph, the Linux Foundation's crowd.dev, and RocketChat's homeserver.",
+    "I work across backend systems, machine learning pipelines, and production open-source tooling. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real open-source codebases where the work has to hold up to review.",
+    "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph and the Linux Foundation's crowd.dev.",
     "On the product side I work part-time at SudoStudy, an education platform, building backend services and shipping features to real students. I also run Coding Moves, a YouTube channel where I teach programming and AI.",
-    "I care about clean engineering, code other people can build on, and shipping things that actually work — whether it's a kernel, an ML pipeline, or a connector in someone else's codebase.",
+    "I care about clean engineering, code other people can build on, and shipping things that actually work — whether it's a backend service, an ML pipeline, or a connector in someone else's codebase.",
   ],
 
   education: [
@@ -88,22 +88,6 @@ export const data = {
 
   projects: [
     {
-      type: 'systems',
-      name: 'Arion OS',
-      desc: 'A learning-focused x86_64 operating system built from scratch — bootloader, kernel, memory management, and system calls, all without a framework.',
-      tags: ['C', 'x86_64 Asm', 'OS'],
-      link: 'https://github.com/Coding-Moves/Arion_OS',
-      year: '2025',
-    },
-    {
-      type: 'ai',
-      name: 'MedGemma Sentinel',
-      desc: 'A health-assistant prototype built on Google\u2019s MedGemma, focused on grounded responses and safety guardrails around medical advice.',
-      tags: ['Python', 'MedGemma', 'Health AI'],
-      link: 'https://github.com/Muawiya-contact/MedGemma-Sentinel',
-      year: '2025',
-    },
-    {
       type: 'math',
       name: 'Linear Algebra Library',
       desc: 'A Python numerical library built only from primitive types — no math libraries — implementing core linear-algebra routines by hand.',
@@ -112,28 +96,12 @@ export const data = {
       year: '2025',
     },
     {
-      type: 'ml',
-      name: 'ML Predictor',
-      desc: 'An end-to-end ML pipeline covering data cleaning, feature engineering, and model training — the production-shaped parts, not just a notebook.',
-      tags: ['Python', 'Scikit-learn'],
-      link: 'https://github.com/Muawiya-contact/ML_Predictor',
-      year: '2024',
-    },
-    {
       type: 'edtech',
       name: 'SudoStudy',
       desc: 'Backend services and mobile-facing features for a live education platform, including native camera capture for long-answer questions.',
       tags: ['React', 'Backend', 'EdTech'],
       link: 'https://github.com/SudoStudy/SudoStudy',
       year: '2024',
-    },
-    {
-      type: 'cv',
-      name: 'Face Mask Detection',
-      desc: 'Real-time mask detection using OpenCV and a convolutional neural network, trained and tuned for live webcam inference.',
-      tags: ['OpenCV', 'Deep Learning'],
-      link: 'https://github.com/Muawiya-contact/FaceMaskDetection',
-      year: '2023',
     },
   ],
 
@@ -169,14 +137,6 @@ export const data = {
       prs: ['docs: update outdated technical specs, Node version, and repository URLs'],
       highlight: 'Docs & specs audit',
       link: 'https://github.com/linuxfoundation/crowd.dev',
-    },
-    {
-      org: 'RocketChat',
-      name: 'homeserver',
-      desc: 'Refactored a confusing getter (origin to senderDomain) in EventWrapper for a clearer, less error-prone event API.',
-      prs: ['refactor: rename origin getter to senderDomain in EventWrapper'],
-      highlight: 'API clarity',
-      link: 'https://github.com/RocketChat/homeserver',
     },
   ],
 
