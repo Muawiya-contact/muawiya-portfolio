@@ -1,7 +1,8 @@
 export const data = {
   name: 'Muawiya Amir',
   title: 'Software Engineer · Systems, ML & Open Source',
-  tagline: 'I work across backend systems, machine learning pipelines, and production open-source tooling.',
+  tagline:
+    'I work across backend systems, machine learning pipelines, and production open-source tooling.',
   location: 'Multan, Pakistan',
   university: 'NFC IET, Multan',
   email: 'contactmuawia@gmail.com',
@@ -24,13 +25,11 @@ export const data = {
       { prompt: '$', cmd: 'building', output: 'SudoStudy (edtech)' },
     ],
     contributionGrid: [
-      0, 1, 2, 1, 3, 2, 0, 1, 3, 4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0,
-      1, 2, 4, 3, 2, 1, 3, 4, 3, 2, 1, 0, 1, 2, 3, 4, 4, 3, 2, 1,
-      2, 3, 1, 4, 3, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0, 1, 3, 4, 2, 1,
-      0, 1, 2, 3, 4, 3, 2, 1, 0, 2, 3, 4, 4, 3, 1, 2, 0, 1, 3, 2,
-      1, 3, 4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0, 1, 2, 4, 3, 2, 1, 0,
-      2, 1, 3, 4, 3, 2, 1, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0, 2, 3, 1,
-      1, 2, 0, 3, 4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0, 1, 3, 4, 2, 3,
+      0, 1, 2, 1, 3, 2, 0, 1, 3, 4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0, 1, 2, 4, 3, 2, 1, 3, 4, 3, 2, 1,
+      0, 1, 2, 3, 4, 4, 3, 2, 1, 2, 3, 1, 4, 3, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0, 1, 3, 4, 2, 1, 0, 1,
+      2, 3, 4, 3, 2, 1, 0, 2, 3, 4, 4, 3, 1, 2, 0, 1, 3, 2, 1, 3, 4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0,
+      1, 2, 4, 3, 2, 1, 0, 2, 1, 3, 4, 3, 2, 1, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0, 2, 3, 1, 1, 2, 0, 3,
+      4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0, 1, 3, 4, 2, 3,
     ],
   },
 
@@ -44,7 +43,7 @@ export const data = {
   about: [
     "I work across backend systems, machine learning pipelines, and production open-source tooling. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real open-source codebases where the work has to hold up to review.",
     "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph and the Linux Foundation's crowd.dev.",
-    "On the product side I work part-time at SudoStudy, an education platform, building backend services and shipping features to real students. I also run Coding Moves, a YouTube channel where I teach programming and AI.",
+    'On the product side I work part-time at SudoStudy, an education platform, building backend services and shipping features to real students. I also run Coding Moves, a YouTube channel where I teach programming and AI.',
     "On a personal note, I'm a Hafiz-e-Quran — the same daily discipline behind memorizing the Qur'an is what keeps me consistent and careful in my work.",
     "I care about clean engineering, code other people can build on, and shipping things that actually work — whether it's a backend service, an ML pipeline, or a connector in someone else's codebase.",
   ],
@@ -139,7 +138,13 @@ export const data = {
     },
     {
       category: 'CS Foundations',
-      items: ['Operating Systems', 'Data Structures', 'Algorithms', 'Linear Algebra', 'Probability'],
+      items: [
+        'Operating Systems',
+        'Data Structures',
+        'Algorithms',
+        'Linear Algebra',
+        'Probability',
+      ],
     },
   ],
 
@@ -172,7 +177,15 @@ export const data = {
       type: 'systems',
       name: 'Diskern',
       desc: 'Intelligent, read-only disk cleaner and analyzer that scans local file systems to determine file safety before freeing space. Built with a deterministic rules engine in Rust (crates/diskern-core) and a Tauri v2 + React desktop interface.',
-      tags: ['Rust', 'Tauri', 'React', 'JavaScript', 'BLAKE3', 'GitHub Actions', 'Systems Programming'],
+      tags: [
+        'Rust',
+        'Tauri',
+        'React',
+        'JavaScript',
+        'BLAKE3',
+        'GitHub Actions',
+        'Systems Programming',
+      ],
       link: 'https://github.com/Coding-Moves/diskern',
       year: '2025',
     },
@@ -214,7 +227,8 @@ export const data = {
   ],
 
   contact: {
-    intro: "Always happy to talk about open source, systems, or an interesting engineering problem. Email is the fastest way to reach me.",
+    intro:
+      'Always happy to talk about open source, systems, or an interesting engineering problem. Email is the fastest way to reach me.',
     links: [
       { label: 'email', href: 'mailto:contactmuawia@gmail.com' },
       { label: 'github', href: 'https://github.com/Muawiya-contact' },

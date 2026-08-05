@@ -1,9 +1,7 @@
 {
   "name": "Muawiya Amir",
   "short_name": "Muawiya",
-  "icons": [
-    { "src": "favicon.png", "sizes": "any", "type": "image/png" }
-  ],
+  "icons": [{ "src": "favicon.png", "sizes": "any", "type": "image/png" }],
   "theme_color": "#070f1c",
   "background_color": "#070f1c",
   "display": "standalone",

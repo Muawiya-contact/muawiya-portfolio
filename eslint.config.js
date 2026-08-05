@@ -5,7 +5,10 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // .claude holds transient Claude Code session worktrees -- full checkouts of
+  // other branches. Linting them reports duplicate findings against code that
+  // is not part of this tree.
+  globalIgnores(['dist', '.claude']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
@@ -17,5 +20,12 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
+  },
+  {
+    // Build tooling runs in Node, not the browser, and .mjs is not matched by
+    // the block above -- without this, scripts/ is silently unlinted.
+    files: ['scripts/**/*.{js,mjs}'],
+    extends: [js.configs.recommended],
+    languageOptions: { globals: globals.node },
   },
 ])

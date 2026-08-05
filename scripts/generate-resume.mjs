@@ -50,7 +50,10 @@ const esc = (s) =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
 
-const bare = (url) => String(url).replace(/^https?:\/\//, '').replace(/\/$/, '')
+const bare = (url) =>
+  String(url)
+    .replace(/^https?:\/\//, '')
+    .replace(/\/$/, '')
 
 // The site links to a repo; the resume prints the org/repo path instead, since
 // a printed URL is only useful if it is readable.
@@ -165,13 +168,18 @@ function buildHtml() {
 <meta charset="utf-8">
 <title>${esc(data.name)} — Résumé</title>
 <style>
-  @page { size: A4; margin: 10mm 12mm; }
+  @page { size: A4; margin: 9mm 10mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: Calibri, "Segoe UI", Arial, sans-serif;
-    font-size: 9.6pt;
-    line-height: 1.24;
+    /* Deliberately NOT Calibri/Segoe UI. Those exist only on Windows, so the
+       PDF rendered by CI and the production deploy fell back to wider metrics
+       and reflowed onto a second page -- the live resume stopped matching the
+       reviewed one. Arial and Liberation Sans are metric-compatible, so
+       Windows, macOS and Linux all lay this out identically. */
+    font-family: Arial, "Liberation Sans", Helvetica, sans-serif;
+    font-size: 8.9pt;
+    line-height: 1.18;
     color: #000;
   }
 
@@ -202,13 +210,13 @@ function buildHtml() {
     text-transform: uppercase;
     border-bottom: 1px solid #000;
     padding-bottom: 0.6mm;
-    margin: 2.8mm 0 1.4mm;
+    margin: 2.2mm 0 1.1mm;
     /* Never strand a heading at the foot of a page. */
     page-break-after: avoid;
   }
 
   /* Keep a role with its first bullets, and a degree with its institute. */
-  .entry { margin-bottom: 1.7mm; page-break-inside: avoid; }
+  .entry { margin-bottom: 1.3mm; page-break-inside: avoid; }
   .row { display: flex; justify-content: space-between; align-items: baseline; gap: 6mm; }
   .rowMain { font-size: 10pt; }
   .rowDate { font-size: 9.2pt; white-space: nowrap; }

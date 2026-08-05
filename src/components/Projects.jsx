@@ -20,9 +20,8 @@ export default function Projects() {
         <div className={styles.track}>
           {data.projects.map((p, i) => {
             const Tag = p.link !== '#' ? 'a' : 'div'
-            const props = p.link !== '#'
-              ? { href: p.link, target: '_blank', rel: 'noreferrer' }
-              : {}
+            const props =
+              p.link !== '#' ? { href: p.link, target: '_blank', rel: 'noreferrer' } : {}
 
             return (
               <Tag
@@ -39,7 +38,9 @@ export default function Projects() {
                 <p className={styles.desc}>{p.desc}</p>
                 <div className={styles.tags}>
                   {p.tags.map((t) => (
-                    <span key={t} className={styles.tag}>{t}</span>
+                    <span key={t} className={styles.tag}>
+                      {t}
+                    </span>
                   ))}
                 </div>
                 {p.link !== '#' && <span className={styles.arrow}>↗</span>}

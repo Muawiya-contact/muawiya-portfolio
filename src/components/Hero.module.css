@@ -42,8 +42,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.25; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
 }
 
 .name {
@@ -91,7 +96,9 @@
   color: #fff;
   padding: 0.7rem 1.4rem;
   border-radius: 4px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   cursor: pointer;
 }
 
@@ -108,7 +115,9 @@
   border: 1px solid var(--border);
   padding: 0.7rem 1.4rem;
   border-radius: 4px;
-  transition: border-color 0.2s, color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
   cursor: alias;
 }
 
@@ -141,9 +150,24 @@
   border-bottom: 1px solid var(--border);
 }
 
-.termBar span:nth-child(1) { width: 8px; height: 8px; border-radius: 50%; background: #ef6b6b; }
-.termBar span:nth-child(2) { width: 8px; height: 8px; border-radius: 50%; background: #e8a838; }
-.termBar span:nth-child(3) { width: 8px; height: 8px; border-radius: 50%; background: #2dd4a8; }
+.termBar span:nth-child(1) {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef6b6b;
+}
+.termBar span:nth-child(2) {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e8a838;
+}
+.termBar span:nth-child(3) {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2dd4a8;
+}
 
 .termLabel {
   margin-left: auto;
@@ -185,7 +209,9 @@
 }
 
 @keyframes blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
 
 .contrib {
@@ -228,10 +254,18 @@
   background: rgba(26, 95, 212, 0.08);
 }
 
-.l1 { background: rgba(26, 95, 212, 0.2); }
-.l2 { background: rgba(26, 95, 212, 0.38); }
-.l3 { background: rgba(26, 95, 212, 0.58); }
-.l4 { background: rgba(45, 212, 168, 0.55); }
+.l1 {
+  background: rgba(26, 95, 212, 0.2);
+}
+.l2 {
+  background: rgba(26, 95, 212, 0.38);
+}
+.l3 {
+  background: rgba(26, 95, 212, 0.58);
+}
+.l4 {
+  background: rgba(45, 212, 168, 0.55);
+}
 
 @media (max-width: 900px) {
   .layout {
@@ -249,9 +283,15 @@
 }
 
 @media (max-width: 480px) {
-  .hero { padding: 5rem 0 3rem; }
-  .layout { padding: 0 1.25rem; }
-  .contribGrid { grid-template-columns: repeat(14, 1fr); }
+  .hero {
+    padding: 5rem 0 3rem;
+  }
+  .layout {
+    padding: 0 1.25rem;
+  }
+  .contribGrid {
+    grid-template-columns: repeat(14, 1fr);
+  }
 }
 
 /* ---- professional tagline (replaces the old quote) ---- */
@@ -277,7 +317,10 @@
   border: 1px solid var(--blue-accent);
   padding: 0.7rem 1.4rem;
   border-radius: 4px;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
   cursor: pointer;
 }
 

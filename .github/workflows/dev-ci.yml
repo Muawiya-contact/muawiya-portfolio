@@ -1,0 +1,72 @@
+name: Dev CI
+
+# Deployment rehearsal for the dev branch: produce the real production bundle
+# and prove it would survive being served from the GitHub Pages sub-path,
+# without publishing anything. Nothing here touches the live site -- the actual
+# deploy stays in deploy.yml, which runs only on main.
+#
+# NOTE: the `dev` branch does not exist yet, so this workflow stays dormant
+# until it is created (`git switch -c dev && git push -u origin dev`).
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dev-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-dry-run:
+    name: Deploy dry run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Latest 20.x; satisfies the engines range in package.json.
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Production build
+        run: npm run build
+
+      # The substantive check. Reads the base out of vite.config.js, then
+      # confirms every href/src in dist/index.html and every manifest icon both
+      # carries that base and resolves to a file actually present in dist/.
+      # A root-absolute "/favicon.png" passes `vite build` and 404s in
+      # production; this is what fails it before it ships.
+      - name: Verify base paths and artefacts
+        run: npm run verify:dist
+
+      # Guards against a build that "succeeds" while emitting nothing useful.
+      - name: Assert bundle is non-trivial
+        run: |
+          set -euo pipefail
+          test -s dist/index.html
+          test -d dist/assets
+          js_count=$(find dist/assets -name '*.js' | wc -l)
+          css_count=$(find dist/assets -name '*.css' | wc -l)
+          echo "dist/assets: ${js_count} js, ${css_count} css"
+          if [ "$js_count" -eq 0 ]; then
+            echo "::error::no JS emitted into dist/assets"
+            exit 1
+          fi
+          echo "total size: $(du -sh dist | cut -f1)"
+
+      # Exercises the same packaging step the real deploy uses, so a artifact
+      # that Pages would reject fails here instead of on main.
+      - name: Package Pages artefact (no deploy)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist

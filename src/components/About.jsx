@@ -8,7 +8,9 @@ export default function About() {
   return (
     <section id="about" className={styles.section} ref={ref}>
       <div className={`${styles.wrap} ${inView ? styles.visible : ''}`}>
-        <span className={styles.ghost} aria-hidden="true">01</span>
+        <span className={styles.ghost} aria-hidden="true">
+          01
+        </span>
         <div className={styles.prose}>
           {data.about.map((para, i) => (
             <p key={i} className={styles.para} style={{ transitionDelay: `${i * 0.08}s` }}>

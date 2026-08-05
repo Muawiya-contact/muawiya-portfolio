@@ -20,8 +20,14 @@
   margin-bottom: 3.5rem;
 }
 
-.header.left { text-align: left; }
-.header.right { text-align: right; margin-left: auto; max-width: 90%; }
+.header.left {
+  text-align: left;
+}
+.header.right {
+  text-align: right;
+  margin-left: auto;
+  max-width: 90%;
+}
 
 .ghost {
   position: absolute;

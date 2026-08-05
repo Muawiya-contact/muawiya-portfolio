@@ -24,7 +24,9 @@ export default function Hero() {
           <p className={styles.tagline}>{data.tagline}</p>
 
           <div className={styles.actions}>
-            <a href="#projects" className={styles.primary}>view my work</a>
+            <a href="#projects" className={styles.primary}>
+              view my work
+            </a>
             <a
               href={`${import.meta.env.BASE_URL}${data.resume}`}
               download
@@ -46,7 +48,9 @@ export default function Hero() {
         <div className={styles.right}>
           <div className={styles.terminal}>
             <div className={styles.termBar}>
-              <span /><span /><span />
+              <span />
+              <span />
+              <span />
               <span className={styles.termLabel}>{data.email}</span>
             </div>
             <div className={styles.termBody}>

@@ -19,7 +19,9 @@
   --font-body: 'DM Sans', sans-serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -72,7 +74,16 @@ button {
   color: var(--white);
 }
 
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--blue-deep); }
-::-webkit-scrollbar-thumb { background: var(--blue-muted); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--blue-accent); }
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--blue-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blue-muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-accent);
+}

@@ -15,11 +15,7 @@ export default function Books() {
   return (
     <section id="books" className={styles.section} ref={ref}>
       <div className={`${styles.wrap} ${inView ? styles.show : ''}`}>
-        <SectionHeader
-          number="06"
-          title="bookshelf"
-          subtitle="what I'm reading to go deeper"
-        />
+        <SectionHeader number="06" title="bookshelf" subtitle="what I'm reading to go deeper" />
 
         <div className={styles.grid}>
           {data.books.map((book, i) => (
