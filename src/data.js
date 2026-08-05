@@ -240,7 +240,6 @@ export const data = {
         'Designed and built the dynamic connector registry that auto-discovers sources and destinations, removing hardcoded dispatch maps across the engine.',
         'Added the Jira connector (create/update), JSON Schema validation for config files, and data-quality tests (freshness, unique, accepted_values).',
         'Shipped OpenTelemetry tracing and metrics with lazy, idempotent providers (+680 lines) and dry-run row-count diffs for safe sync previews.',
-        'Selected to contribute with this organization for Google Summer of Code 2027.',
       ],
       SudoStudy: [
         'Build backend services and databases for an education platform and integrate third-party APIs.',
@@ -254,6 +253,8 @@ export const data = {
       'Google Cloud Specialization — NAVTTC (ongoing)',
     ],
     competitive: '400+ problems solved on LeetCode, focused on DSA & algorithm optimization.',
+    // Retained but not printed: the ATS resume omits an interests section to
+    // stay on one page. Re-add a block in generate-resume.mjs to restore it.
     interests: [
       'ML research paper (in progress)',
       'Open-source security & infrastructure',
