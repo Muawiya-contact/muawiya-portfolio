@@ -1,0 +1,122 @@
+name: CI
+
+# Every check runs as its own job so a red PR names the thing that broke
+# rather than a single opaque "CI failed". Any non-zero exit fails its job.
+#
+# NOTE: a failing job does not by itself prevent a merge. GitHub only blocks
+# merging when these checks are marked required under
+# Settings > Branches > Branch protection rules for `main` (and `dev`).
+# Add: Lint, Format, Build, Security audit.
+
+on:
+  pull_request:
+    branches: [main, dev]
+
+permissions:
+  contents: read
+
+# A new push to the same PR supersedes the previous run.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ESLint covers src/**/*.{js,jsx} and scripts/**/*.{js,mjs}: unparseable
+      # syntax, undefined identifiers, and unresolved imports all fail here.
+      # This project is JSX with no TypeScript, so there is no tsc step; type
+      # coverage comes from @types/react at author time only.
+      - name: ESLint
+        run: npm run lint
+
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Uses the pinned local prettier and the committed .prettierrc.json, so
+      # CI and `npm run format` can never disagree about what correct looks like.
+      - name: Prettier check
+        run: npm run format:check
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # `prebuild` regenerates the resume PDF via headless Chrome, which is
+      # preinstalled on ubuntu-latest. If it ever is not, the generator warns
+      # and exits 0, keeping the committed PDF -- the build must not fail over
+      # regenerating a file already in the repo.
+      - name: Production build
+        run: npm run build
+
+      # Compiling is not the same as being deployable. This catches references
+      # that miss the Vite base and would 404 under the GitHub Pages sub-path.
+      - name: Verify dist/ is deployable
+        run: npm run verify:dist
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ github.sha }}
+          path: dist/
+          retention-days: 7
+
+  audit:
+    name: Security audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Fails on high and critical advisories. Moderate and low are reported by
+      # the summary step below but do not block, so routine transitive noise in
+      # the dev toolchain cannot wedge every PR.
+      - name: npm audit (high and above)
+        run: npm audit --audit-level=high
+
+      - name: Full advisory summary
+        if: always()
+        run: npm audit || true
