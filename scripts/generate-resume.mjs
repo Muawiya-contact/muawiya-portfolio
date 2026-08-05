@@ -19,7 +19,7 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 import { data } from '../src/data.js'
 
@@ -27,18 +27,28 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT = join(root, 'public', 'Muawiya-Amir-Resume.pdf')
 
 // Chrome renders `--print-to-pdf` from the first candidate that exists.
+// Set CHROME_PATH to override when the browser lives somewhere unusual.
 const BROWSERS = [
+  process.env.CHROME_PATH,
   'C:/Program Files/Google/Chrome/Application/chrome.exe',
   'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
   'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
   '/usr/bin/google-chrome',
+  '/usr/bin/google-chrome-stable',
   '/usr/bin/chromium',
+  '/usr/bin/chromium-browser',
+  '/snap/bin/chromium',
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-]
+].filter(Boolean)
 
+// Escapes quotes too: esc() also feeds double-quoted href attributes via link().
 const esc = (s) =>
-  String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
 
 const bare = (url) => String(url).replace(/^https?:\/\//, '').replace(/\/$/, '')
 
@@ -57,8 +67,15 @@ const REPO_URLS = {
 }
 
 // The visible label stays the full literal org/repo path, so an ATS reading
-// text-only still gets a parseable string.
-const repoLink = (path) => link(REPO_URLS[path] ?? `https://github.com/${path}`, path)
+// text-only still gets a parseable string. repoPath only strips a github.com
+// host, so when it changes nothing the entry lives elsewhere (GitLab, a
+// self-hosted forge) and keeps its own URL rather than being mangled into a
+// non-existent github.com/<host>/... link.
+const repoLink = (url) => {
+  const path = repoPath(url)
+  const href = REPO_URLS[path] ?? (path === bare(url) ? url : `https://github.com/${path}`)
+  return link(href, path)
+}
 
 // Inline so the PDF stays self-contained; no external image request.
 const GITHUB_ICON =
@@ -114,7 +131,7 @@ function buildHtml() {
     .join('')
 
   const openSource = data.openSource
-    .map((o) => `<li><strong>${repoLink(repoPath(o.link))}</strong> — ${esc(o.desc)}</li>`)
+    .map((o) => `<li><strong>${repoLink(o.link)}</strong> — ${esc(o.desc)}</li>`)
     .join('')
 
   // "Languages: Python, C / C++, ..." — plain text, no badges.
@@ -135,7 +152,10 @@ function buildHtml() {
     link(data.links.linkedin, bare(data.links.linkedin)),
   ].join(' &nbsp;|&nbsp; ')
 
+  // filter(Boolean): competitive is optional, and an empty one would otherwise
+  // print a stray bullet (or the literal "undefined" if the key is removed).
   const certs = [...r.certifications, r.competitive]
+    .filter(Boolean)
     .map((c) => `<li>${esc(c)}</li>`)
     .join('')
 
@@ -235,11 +255,7 @@ function buildHtml() {
 
 function render(html) {
   const browser = BROWSERS.find((b) => existsSync(b))
-  if (!browser) {
-    throw new Error(
-      `No Chrome or Edge binary found. Looked in:\n  ${BROWSERS.join('\n  ')}`,
-    )
-  }
+  if (!browser) return null
 
   const tmp = mkdtempSync(join(tmpdir(), 'resume-'))
   const htmlPath = join(tmp, 'resume.html')
@@ -255,7 +271,9 @@ function render(html) {
         '--no-sandbox',
         '--no-pdf-header-footer',
         `--print-to-pdf=${pdfPath}`,
-        new URL(`file:///${htmlPath.replace(/\\/g, '/')}`).href,
+        // pathToFileURL, not string concatenation: on POSIX an absolute path
+        // appended to 'file:///' yields a malformed 'file:////tmp/...'.
+        pathToFileURL(htmlPath).href,
       ],
       { stdio: 'pipe' },
     )
@@ -269,6 +287,17 @@ function render(html) {
 }
 
 const browser = render(buildHtml())
+
+// No browser is a skip, not a failure. This runs from `prebuild`, and the PDF
+// is committed -- failing here would break `npm run build` (and the Pages
+// deploy) on any machine without Chrome, to regenerate a file we already have.
+if (!browser) {
+  console.warn('! No Chrome or Edge found; keeping the committed resume PDF.')
+  console.warn(`  Looked in:\n    ${BROWSERS.join('\n    ')}`)
+  console.warn('  Set CHROME_PATH to point at a browser if you need to rebuild it.')
+  process.exit(0)
+}
+
 const kb = (readFileSync(OUT).length / 1024).toFixed(1)
 console.log(`✓ ${OUT}  (${kb} KB)`)
 console.log(`  rendered by ${browser}`)
