@@ -168,6 +168,14 @@ export const data = {
       link: 'https://github.com/Coding-Moves/BSAI-Projects',
       year: '2025',
     },
+    {
+      type: 'systems',
+      name: 'Diskern',
+      desc: 'Intelligent, read-only disk cleaner and analyzer that scans local file systems to determine file safety before freeing space. Built with a deterministic rules engine in Rust (crates/diskern-core) and a Tauri v2 + React desktop interface.',
+      tags: ['Rust', 'Tauri', 'React', 'JavaScript', 'BLAKE3', 'GitHub Actions', 'Systems Programming'],
+      link: 'https://github.com/Coding-Moves/diskern',
+      year: '2025',
+    },
   ],
 
   openSource: [
