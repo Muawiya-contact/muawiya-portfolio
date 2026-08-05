@@ -27,8 +27,18 @@ const notes = []
 
 // Read the deployed base straight from vite.config.js so the two cannot drift.
 const viteConfig = readFileSync(join(root, 'vite.config.js'), 'utf8')
-const baseMatch = viteConfig.match(/base:\s*['"`]([^'"`]+)['"`]/)
-const base = baseMatch ? baseMatch[1] : '/'
+// Strip comments first, and require a delimiter before the key, so a
+// commented-out or nested `base:` cannot be picked up instead of the real one.
+// Getting this wrong would silently disable the root-absolute check below --
+// the failure this whole script exists to catch -- so an unreadable base is a
+// hard error rather than a default.
+const viteSource = viteConfig.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '')
+const baseMatch = viteSource.match(/(?:^|[\s,{])base:\s*['"`]([^'"`]+)['"`]/)
+if (!baseMatch) {
+  console.error('✗ could not read `base` from vite.config.js; refusing to verify against a guess.')
+  process.exit(1)
+}
+const base = baseMatch[1]
 notes.push(`configured base: ${base}`)
 
 const indexPath = join(dist, 'index.html')
@@ -40,8 +50,10 @@ if (!existsSync(indexPath)) {
 const html = readFileSync(indexPath, 'utf8')
 if (html.trim().length === 0) errors.push('dist/index.html is empty')
 
-// Collect href="..." and src="..." values from the built HTML.
-const refs = [...html.matchAll(/(?:href|src)=["']([^"']+)["']/g)].map((m) => m[1])
+// Collect href="..." and src="..." values from the built HTML. The leading
+// delimiter matters: without it this also matches data-src / data-href, which
+// are not fetched at load time and would fail the run for no reason.
+const refs = [...html.matchAll(/(?:^|[\s"'])(?:href|src)=["']([^"']+)["']/g)].map((m) => m[1])
 
 const isExternal = (u) =>
   /^(https?:)?\/\//.test(u) || u.startsWith('data:') || u.startsWith('mailto:')
