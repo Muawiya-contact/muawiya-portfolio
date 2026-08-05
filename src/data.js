@@ -253,8 +253,6 @@ export const data = {
       'Google Cloud Specialization — NAVTTC (ongoing)',
     ],
     competitive: '400+ problems solved on LeetCode, focused on DSA & algorithm optimization.',
-    // Retained but not printed: the ATS resume omits an interests section to
-    // stay on one page. Re-add a block in generate-resume.mjs to restore it.
     interests: [
       'ML research paper (in progress)',
       'Open-source security & infrastructure',
