@@ -47,7 +47,7 @@ export default function Hero() {
           <div className={styles.terminal}>
             <div className={styles.termBar}>
               <span /><span /><span />
-              <span className={styles.termLabel}>muawiya@multan ~</span>
+              <span className={styles.termLabel}>{data.email}</span>
             </div>
             <div className={styles.termBody}>
               {data.hero.terminal.map((line) => (
