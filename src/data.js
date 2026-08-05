@@ -160,6 +160,14 @@ export const data = {
       link: 'https://github.com/SudoStudy/SudoStudy',
       year: '2024',
     },
+    {
+      type: 'academic',
+      name: 'BSAI University Projects (NFC-Projects)',
+      desc: 'Structured collection of semester-wise coursework and systems projects for my BS in Artificial Intelligence at NFC IET Multan. Includes data structures, algorithms, IoT simulators, search engine implementations, and AI academic tools.',
+      tags: ['Python', 'C++', 'Java', 'JavaScript', 'TypeScript', 'Data Structures', 'Algorithms'],
+      link: 'https://github.com/Coding-Moves/BSAI-Projects',
+      year: '2025',
+    },
   ],
 
   openSource: [
