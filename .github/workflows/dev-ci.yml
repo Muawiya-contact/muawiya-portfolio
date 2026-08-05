@@ -31,6 +31,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
+          # Latest 20.x; satisfies the engines range in package.json.
           node-version: '20'
           cache: npm
 

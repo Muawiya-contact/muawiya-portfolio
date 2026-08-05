@@ -21,6 +21,9 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  # Resolves to the latest 20.x on the runner (20.20.2 at time of writing),
+  # which satisfies the "^20.19.0 || >=22.12.0" engines range vite@8 declares.
+  # Pinning an exact patch here would lock CI to the oldest acceptable one.
   NODE_VERSION: '20'
 
 jobs:

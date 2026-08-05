@@ -38,8 +38,12 @@ if (!baseMatch) {
   console.error('✗ could not read `base` from vite.config.js; refusing to verify against a guess.')
   process.exit(1)
 }
-const base = baseMatch[1]
-notes.push(`configured base: ${base}`)
+// Normalise to a trailing slash. Without it, startsWith(base) has no boundary:
+// base '/site' would match '/site-staging/assets/x.js' and slice it to
+// '-staging/assets/x.js', reporting a missing file that is not missing.
+const rawBase = baseMatch[1]
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`
+notes.push(`configured base: ${base}${rawBase === base ? '' : ` (normalised from ${rawBase})`}`)
 
 const indexPath = join(dist, 'index.html')
 if (!existsSync(indexPath)) {
