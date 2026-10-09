@@ -61,6 +61,11 @@ const repoPath = (url) => bare(url).replace(/^github\.com\//, '')
 
 const link = (href, text) => `<a href="${esc(href)}">${esc(text)}</a>`
 
+const resumePoint = (point) =>
+  typeof point === 'string'
+    ? esc(point)
+    : `${esc(point.before)}<a class="detailLink" href="${esc(point.href)}">${esc(point.text)}</a>${esc(point.after)}`
+
 // Where a printed label and its real URL diverge. data.js points the drt-hub
 // entry at a PR search, and crowd.dev's canonical repo moved to the crowd-dev
 // org while the project is still known by the Linux Foundation path we print.
@@ -121,7 +126,7 @@ function buildHtml() {
         <span class="rowMain"><strong>${esc(job.role)}</strong>, ${org}</span>
         <span class="rowDate">${esc(job.period)}</span>
       </div>
-      <ul>${points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
+      <ul>${points.map((p) => `<li>${resumePoint(p)}</li>`).join('')}</ul>
     </div>`
     })
     .join('')
@@ -225,6 +230,7 @@ function buildHtml() {
   /* Clickable but visually plain: an ATS reads the label text either way, and
      blue underlines would fight the rest of the page. */
   a { color: inherit; text-decoration: none; }
+  a.detailLink { text-decoration: underline; }
 
   .contactIcon {
     width: 1em; height: 1em;

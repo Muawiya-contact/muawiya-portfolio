@@ -59,8 +59,8 @@ export const data = {
         'Improved the Gemini study assistant with streaming replies and conversation history.',
         'Made teacher dashboards easier to use on mobile, fixed authentication and grading issues, and contributed to a read-only analytics integration that protects student contact details.',
       ],
-      link: 'https://github.com/SudoStudy/SudoStudy',
-      linkLabel: 'SudoStudy on GitHub',
+      link: 'https://sudostudy.com/',
+      linkLabel: 'visit SudoStudy',
     },
     {
       role: 'Open-Source Engineer & Triage Collaborator',
@@ -186,7 +186,7 @@ export const data = {
       name: 'SudoStudy',
       desc: 'Teacher tools for quizzes, Google Classroom publishing, grading, and student performance reports on an education platform.',
       tags: ['React', 'Backend', 'EdTech'],
-      link: 'https://github.com/SudoStudy/SudoStudy',
+      link: 'https://sudostudy.com/',
       year: '2025–26',
       includeInResume: false,
     },
@@ -282,7 +282,12 @@ export const data = {
       ],
       SudoStudy: [
         'Built teacher workflows for section-based quizzes, student assignment, Google Classroom publishing, and grade return.',
-        'Developed scoring and performance reports with charts and PDF exports.',
+        {
+          before: 'Developed scoring and ',
+          text: 'performance reports',
+          after: ' with charts and PDF exports.',
+          href: 'https://sudostudy.com/user-guide/teachers/student-reports',
+        },
         'Improved a Gemini study assistant with streaming responses and conversation history.',
         'Improved mobile teacher dashboards, fixed authentication and grading issues, and contributed to read-only teacher analytics that protects student contact details.',
       ],
