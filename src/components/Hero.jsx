@@ -28,8 +28,8 @@ export default function Hero() {
               view my work
             </a>
             <a
-              href={`${import.meta.env.BASE_URL}${data.resume}`}
-              download
+              href={`${import.meta.env.BASE_URL}${data.resume}?v=${import.meta.env.VITE_RESUME_VERSION}`}
+              download={data.resume}
               className={styles.resume}
             >
               ↓ résumé
