@@ -33,13 +33,6 @@ export const data = {
     ],
   },
 
-  stats: [
-    { num: '5+', label: 'open-source orgs' },
-    { num: 'Triage', label: 'drt-hub collaborator' },
-    { num: '1,201', label: 'gh contributions 2025' },
-    { num: '89', label: 'public repos' },
-  ],
-
   about: [
     "I build apps and backend systems, and contribute to production open-source tooling. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real codebases where the work has to hold up to review.",
     "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph and the Linux Foundation's crowd.dev.",
