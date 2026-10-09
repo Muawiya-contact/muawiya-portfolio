@@ -22,7 +22,7 @@ export const data = {
       { prompt: '$', cmd: 'oss --orgs', output: 'drt-hub · Apache · Linux Foundation' },
       { prompt: '$', cmd: 'drt-hub --status', output: 'Triage Collaborator' },
       { prompt: '$', cmd: 'gh contrib --year 2025', output: '1,201 contributions' },
-      { prompt: '$', cmd: 'building', output: 'SudoStudy (edtech)' },
+      { prompt: '$', cmd: 'building', output: 'One Concept (mobile learning)' },
     ],
     contributionGrid: [
       0, 1, 2, 1, 3, 2, 0, 1, 3, 4, 2, 1, 0, 2, 3, 4, 3, 2, 1, 0, 1, 2, 4, 3, 2, 1, 3, 4, 3, 2, 1,
@@ -43,7 +43,7 @@ export const data = {
   about: [
     "I build apps and backend systems, and contribute to production open-source tooling. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real codebases where the work has to hold up to review.",
     "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph and the Linux Foundation's crowd.dev.",
-    'At SudoStudy, I helped teachers run quizzes and understand how their students were doing, from classroom publishing and grading to clear performance reports. I also run Coding Moves, a YouTube channel where I teach programming and AI.',
+    'At SudoStudy, I helped teachers run quizzes and understand how their students were doing, from classroom publishing and grading to clear performance reports. Now I am building One Concept, a mobile app for learning something new each day, and Diskern, a desktop tool for understanding what is safe to clean. I also run Coding Moves, a YouTube channel where I teach programming and AI.',
     "On a personal note, I'm a Hafiz-e-Quran — the same daily discipline behind memorizing the Qur'an is what keeps me consistent and careful in my work.",
     "I care about clean engineering, code other people can build on, and shipping things that actually work — whether it's a backend service, an ML pipeline, or a connector in someone else's codebase.",
   ],
@@ -152,6 +152,22 @@ export const data = {
 
   projects: [
     {
+      type: 'mobile',
+      name: 'One Concept',
+      desc: 'An Android app that teaches one short technical concept each day. It rotates topics, sends timely reminders, and keeps a synced record of what you have learned.',
+      tags: ['React Native', 'Expo', 'FastAPI', 'Gemini'],
+      link: 'https://github.com/Coding-Moves/one-concept',
+      year: '2026',
+    },
+    {
+      type: 'systems',
+      name: 'Diskern',
+      desc: 'A desktop app that explains what is safe to clean before moving files into a recoverable quarantine. Built with a Rust rules engine and a Tauri/React interface.',
+      tags: ['Rust', 'Tauri', 'React', 'Systems Programming'],
+      link: 'https://github.com/Coding-Moves/diskern',
+      year: '2026',
+    },
+    {
       type: 'math',
       name: 'Linear Algebra Library',
       desc: 'A Python numerical library built only from primitive types — no math libraries — implementing core linear-algebra routines by hand.',
@@ -166,6 +182,7 @@ export const data = {
       tags: ['React', 'Backend', 'EdTech'],
       link: 'https://github.com/SudoStudy/SudoStudy',
       year: '2025–26',
+      includeInResume: false,
     },
     {
       type: 'academic',
@@ -173,22 +190,6 @@ export const data = {
       desc: 'Structured collection of semester-wise coursework and systems projects for my BS in Artificial Intelligence at NFC IET Multan. Includes data structures, algorithms, IoT simulators, search engine implementations, and AI academic tools.',
       tags: ['Python', 'C++', 'Java', 'JavaScript', 'TypeScript', 'Data Structures', 'Algorithms'],
       link: 'https://github.com/Coding-Moves/BSAI-Projects',
-      year: '2025',
-    },
-    {
-      type: 'systems',
-      name: 'Diskern',
-      desc: 'Intelligent, read-only disk cleaner and analyzer that scans local file systems to determine file safety before freeing space. Built with a deterministic rules engine in Rust (crates/diskern-core) and a Tauri v2 + React desktop interface.',
-      tags: [
-        'Rust',
-        'Tauri',
-        'React',
-        'JavaScript',
-        'BLAKE3',
-        'GitHub Actions',
-        'Systems Programming',
-      ],
-      link: 'https://github.com/Coding-Moves/diskern',
       year: '2025',
     },
   ],

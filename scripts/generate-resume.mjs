@@ -125,10 +125,11 @@ function buildHtml() {
     .join('')
 
   const projects = data.projects
+    .filter((p) => p.includeInResume !== false)
     .map(
       (p) => `
     <div class="entry">
-      <div class="sub"><strong>${esc(p.name)}</strong> — ${esc(p.desc)}</div>
+      <div class="sub"><strong>${p.link ? link(p.link, p.name) : esc(p.name)}</strong> — ${esc(p.desc)}</div>
     </div>`,
     )
     .join('')
