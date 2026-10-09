@@ -81,8 +81,23 @@ const repoLink = (url) => {
 }
 
 // Inline so the PDF stays self-contained; no external image request.
+const outlineIcon = (contents) =>
+  `<svg class="contactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${contents}</svg>`
+
+const LOCATION_ICON = outlineIcon(
+  '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+)
+const PHONE_ICON = outlineIcon(
+  '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.34 1.9.67 2.81a2 2 0 0 1-.45 2.11L8.06 9.91a16 16 0 0 0 6.03 6.03l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.55 2.81.67A2 2 0 0 1 22 16.92Z"/>',
+)
+const EMAIL_ICON = outlineIcon(
+  '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/>',
+)
+const LINKEDIN_ICON = outlineIcon(
+  '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>',
+)
 const GITHUB_ICON =
-  '<svg class="ghIcon" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" ' +
+  '<svg class="contactIcon" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" ' +
   'd="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49' +
   '-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82' +
   '.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15' +
@@ -148,13 +163,23 @@ function buildHtml() {
     )
     .join('')
 
-  const contact = [
-    esc(data.location),
-    esc(r.phone),
-    link(`mailto:${data.email}`, data.email),
-    GITHUB_ICON + link(data.links.github, bare(data.links.github)),
-    link(data.links.linkedin, bare(data.links.linkedin)),
-  ].join(' &nbsp;|&nbsp; ')
+  const contactRows = [
+    [
+      LOCATION_ICON + link('https://www.google.com/maps/place/Multan,+Pakistan', data.location),
+      PHONE_ICON + link(`tel:${r.phone.replace(/[^\d+]/g, '')}`, r.phone),
+      EMAIL_ICON + link(`mailto:${data.email}`, data.email),
+    ],
+    [
+      GITHUB_ICON + link(data.links.github, bare(data.links.github)),
+      LINKEDIN_ICON + link(data.links.linkedin, bare(data.links.linkedin)),
+    ],
+  ]
+  const contact = contactRows
+    .map(
+      (row) =>
+        `<div class="contactRow">${row.map((item) => `<span class="contactItem">${item}</span>`).join('<span class="contactSep">|</span>')}</div>`,
+    )
+    .join('')
 
   // filter(Boolean): competitive is optional, and an empty one would otherwise
   // print a stray bullet (or the literal "undefined" if the key is removed).
@@ -193,14 +218,16 @@ function buildHtml() {
   }
   .role { font-size: 10pt; margin-bottom: 1.1mm; }
   .contact { font-size: 8.8pt; }
+  .contactRow { display: flex; justify-content: center; align-items: center; gap: 1.8mm; margin-top: 0.5mm; }
+  .contactItem { display: inline-flex; align-items: center; white-space: nowrap; }
+  .contactSep { color: #555; }
 
   /* Clickable but visually plain: an ATS reads the label text either way, and
      blue underlines would fight the rest of the page. */
   a { color: inherit; text-decoration: none; }
 
-  .ghIcon {
+  .contactIcon {
     width: 1em; height: 1em;
-    vertical-align: -0.14em;
     margin-right: 0.25em;
   }
 
