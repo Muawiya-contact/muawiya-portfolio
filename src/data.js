@@ -104,6 +104,12 @@ export const data = {
       status: 'completed',
       takeaway: 'A deliberate framework for picking up hard skills fast.',
     },
+    {
+      title: 'The Way of the Superior Man',
+      author: 'David Deida',
+      tag: 'Personal Growth',
+      takeaway: 'On purpose, presence, and integrity in work and relationships.',
+    },
   ],
 
   education: [
