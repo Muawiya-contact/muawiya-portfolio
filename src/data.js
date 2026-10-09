@@ -174,12 +174,12 @@ export const data = {
       year: '2026',
     },
     {
-      type: 'math',
-      name: 'Linear Algebra Library',
-      desc: 'A Python numerical library built only from primitive types — no math libraries — implementing core linear-algebra routines by hand.',
-      tags: ['Python', 'Numerical'],
-      link: 'https://github.com/Coding-Moves/Linear-Algebra',
-      year: '2025',
+      type: 'systems',
+      name: 'Arion OS',
+      desc: 'A 64-bit operating system built in C and Assembly, with a custom kernel, memory management, and system calls.',
+      tags: ['C', 'Assembly', 'Operating Systems'],
+      link: 'https://github.com/Coding-Moves/Arion_OS',
+      year: '2026',
     },
     {
       type: 'edtech',
