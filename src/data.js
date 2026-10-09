@@ -286,7 +286,7 @@ export const data = {
           before: 'Developed scoring and ',
           text: 'performance reports',
           after: ' with charts and PDF exports.',
-          href: 'https://sudostudy.com/user-guide/teachers/student-reports',
+          href: 'https://sudostudy.com/',
         },
         'Improved a Gemini study assistant with streaming responses and conversation history.',
         'Improved mobile teacher dashboards, fixed authentication and grading issues, and contributed to read-only teacher analytics that protects student contact details.',
