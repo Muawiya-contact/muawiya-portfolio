@@ -1,8 +1,8 @@
 export const data = {
   name: 'Muawiya Amir',
-  title: 'Software Engineer · Systems, ML & Open Source',
+  title: 'Software Engineer · Full Stack & Open Source',
   tagline:
-    'I work across backend systems, machine learning pipelines, and production open-source tooling.',
+    'I build practical apps and reliable systems, and contribute to open-source tools people use.',
   location: 'Multan, Pakistan',
   university: 'NFC IET, Multan',
   email: 'contactmuawia@gmail.com',
@@ -18,7 +18,7 @@ export const data = {
     status: 'building & contributing in open source',
     terminal: [
       { prompt: '$', cmd: 'whoami', output: 'muawiya-amir' },
-      { prompt: '$', cmd: 'role --current', output: 'software engineer · systems + ML' },
+      { prompt: '$', cmd: 'role --current', output: 'software engineer · full stack + systems' },
       { prompt: '$', cmd: 'oss --orgs', output: 'drt-hub · Apache · Linux Foundation' },
       { prompt: '$', cmd: 'drt-hub --status', output: 'Triage Collaborator' },
       { prompt: '$', cmd: 'gh contrib --year 2025', output: '1,201 contributions' },
@@ -41,14 +41,27 @@ export const data = {
   ],
 
   about: [
-    "I work across backend systems, machine learning pipelines, and production open-source tooling. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real open-source codebases where the work has to hold up to review.",
+    "I build apps and backend systems, and contribute to production open-source tooling. I'm completing dual degrees in Artificial Intelligence and Mathematics, and I spend most of my time in real codebases where the work has to hold up to review.",
     "My strongest work is open source. I'm a Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine, where I designed the dynamic connector registry, added connectors and JSON Schema validation, and shipped its OpenTelemetry support. I've also landed CI and infrastructure fixes in Apache HugeGraph and the Linux Foundation's crowd.dev.",
-    'On the product side I work part-time at SudoStudy, an education platform, building backend services and shipping features to real students. I also run Coding Moves, a YouTube channel where I teach programming and AI.',
+    'At SudoStudy, I helped teachers run quizzes and understand how their students were doing, from classroom publishing and grading to clear performance reports. I also run Coding Moves, a YouTube channel where I teach programming and AI.',
     "On a personal note, I'm a Hafiz-e-Quran — the same daily discipline behind memorizing the Qur'an is what keeps me consistent and careful in my work.",
     "I care about clean engineering, code other people can build on, and shipping things that actually work — whether it's a backend service, an ML pipeline, or a connector in someone else's codebase.",
   ],
 
   experience: [
+    {
+      role: 'Software Engineer (Full Stack)',
+      org: 'SudoStudy',
+      period: 'Sep 2025 — Oct 2026',
+      points: [
+        'Built teacher tools to create section-based quizzes, assign students, publish to Google Classroom, and return grades.',
+        'Developed scoring and student performance reports with charts and PDF exports.',
+        'Improved the Gemini study assistant with streaming replies and conversation history.',
+        'Made teacher dashboards easier to use on mobile, fixed authentication and grading issues, and contributed to a read-only analytics integration that protects student contact details.',
+      ],
+      link: 'https://github.com/SudoStudy/SudoStudy',
+      linkLabel: 'SudoStudy on GitHub',
+    },
     {
       role: 'Open-Source Engineer & Triage Collaborator',
       org: 'drt-hub/drt',
@@ -59,17 +72,6 @@ export const data = {
       ],
       link: 'https://github.com/drt-hub/drt/pulls?q=is%3Apr+author%3AMuawiya-contact',
       linkLabel: 'view my pull requests',
-    },
-    {
-      role: 'Full-Stack Developer (Part-Time)',
-      org: 'SudoStudy',
-      period: 'Sep 2025 — Present',
-      points: [
-        'Build backend services and databases for a live education platform and integrate third-party APIs.',
-        'Shipped student-facing features including native mobile-camera capture and quiz-attempt review for teachers.',
-      ],
-      link: 'https://github.com/SudoStudy/SudoStudy',
-      linkLabel: 'SudoStudy on GitHub',
     },
   ],
 
@@ -160,10 +162,10 @@ export const data = {
     {
       type: 'edtech',
       name: 'SudoStudy',
-      desc: 'Backend services and mobile-facing features for a live education platform, including native camera capture for long-answer questions.',
+      desc: 'Teacher tools for quizzes, Google Classroom publishing, grading, and student performance reports on an education platform.',
       tags: ['React', 'Backend', 'EdTech'],
       link: 'https://github.com/SudoStudy/SudoStudy',
-      year: '2024',
+      year: '2025–26',
     },
     {
       type: 'academic',
@@ -258,10 +260,10 @@ export const data = {
   // the experience in more detail than the site's two-line summaries.
   // Distinct from `resume` above, which is the download filename.
   resumeContent: {
-    title: 'Software Engineer · Backend, ML & Open Source',
+    title: 'Software Engineer · Full Stack & Open Source',
     phone: '+92 329 7316882',
     summary:
-      'Artificial Intelligence and Mathematics student and active open-source contributor. Triage Collaborator on drt-hub/drt, a Python Reverse ETL engine shipped across 30+ PyPI releases, where I build connectors, configuration validation, and observability tooling and review community pull requests. I work across backend systems, machine-learning infrastructure, and production open-source tooling, and I am drawn to problems that need both engineering depth and clean execution.',
+      'Software engineer with full-stack experience at SudoStudy and a strong open-source background. I built tools that help teachers create quizzes, grade work, and understand student progress. As a Triage Collaborator on drt-hub/drt, I build connectors and observability tools and review community contributions. I study Artificial Intelligence and Mathematics and enjoy making complex systems useful to people.',
     // Keyed by the `org` field of data.experience; entries without a match fall
     // back to that role's site-facing `points`.
     points: {
@@ -272,9 +274,10 @@ export const data = {
         'Shipped OpenTelemetry tracing and metrics with lazy, idempotent providers (+680 lines) and dry-run row-count diffs for safe sync previews.',
       ],
       SudoStudy: [
-        'Build backend services and databases for an education platform and integrate third-party APIs.',
-        'Shipped student features including native mobile-camera capture for long-answer questions and quiz-attempt review for teachers.',
-        'Debugged cross-stack failures across quiz, subject, and group-management flows.',
+        'Built teacher workflows for section-based quizzes, student assignment, Google Classroom publishing, and grade return.',
+        'Developed scoring and performance reports with charts and PDF exports.',
+        'Improved a Gemini study assistant with streaming responses and conversation history.',
+        'Improved mobile teacher dashboards, fixed authentication and grading issues, and contributed to read-only teacher analytics that protects student contact details.',
       ],
     },
     certifications: [
