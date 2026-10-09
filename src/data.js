@@ -101,7 +101,6 @@ export const data = {
       title: 'The Way of the Superior Man',
       author: 'David Deida',
       tag: 'Personal Growth',
-      status: 'pending',
       takeaway: 'On purpose, presence, and integrity in work and relationships.',
     },
   ],
