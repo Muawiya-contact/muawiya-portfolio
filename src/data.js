@@ -168,14 +168,6 @@ export const data = {
       year: '2026',
     },
     {
-      type: 'systems',
-      name: 'Arion OS',
-      desc: 'A 64-bit operating system built in C and Assembly, with a custom kernel, memory management, and system calls.',
-      tags: ['C', 'Assembly', 'Operating Systems'],
-      link: 'https://github.com/Coding-Moves/Arion_OS',
-      year: '2026',
-    },
-    {
       type: 'edtech',
       name: 'SudoStudy',
       desc: 'Teacher tools for quizzes, Google Classroom publishing, grading, and student performance reports on an education platform.',
